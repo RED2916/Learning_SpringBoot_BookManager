@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tydic.books.dao.BooksMapper">
+    <select id="getBooksById" resultType="Books">
+        select * from ssmbuild.books where bookID=#{bookID}
+    </select>
+
+    <select id="getAllBooks" resultType="Books">
+        select * from ssmbuild.books
+    </select>
+
+    <insert id="addBooks" parameterType="Books">
+        insert into ssmbuild.books values (#{bookID},#{bookName},#{bookCounts},#{detail})
+    </insert>
+
+    <update id="updateBooks" parameterType="Books">
+        update ssmbuild.books set
+        bookName=#{bookName},bookCounts=#{bookCounts},detail=#{detail}
+        where bookID=#{bookID}
+    </update>
+
+    <delete id="deleteBooksById">
+        delete from ssmbuild.books where bookID=#{bookID}
+    </delete>
+
+    <select id="getBooksByName" resultType="Books">
+        select * from ssmbuild.books where bookName like CONCAT('%',#{bookName},'%')
+    </select>
+
+    <select id="getBooksAmount" resultType="int">
+        select count(*) from ssmbuild.books;
+    </select>
+</mapper>
